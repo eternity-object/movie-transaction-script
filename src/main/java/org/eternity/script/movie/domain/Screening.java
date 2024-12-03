@@ -1,14 +1,21 @@
 package org.eternity.script.movie.domain;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import lombok.*;
 
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
+@Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED) @AllArgsConstructor
 @Getter @Setter
 public class Screening {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Long movieId;
     private Integer sequence;
