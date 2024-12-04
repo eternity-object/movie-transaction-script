@@ -1,7 +1,5 @@
 package org.eternity.script.movie.service;
 
-import org.eternity.script.generic.PlayTime;
-import org.eternity.script.generic.TimeInterval;
 import org.eternity.script.movie.domain.*;
 import org.eternity.script.movie.persistence.*;
 import org.junit.jupiter.api.Assertions;
@@ -50,9 +48,8 @@ public class ReservationServiceTest {
 
         Mockito.when(discountConditionDAO.selectDiscountConditions(policyId))
                 .thenReturn(List.of(
-                        new DiscountCondition(policyId, SEQUENCE_CONDITION, null, 1),
-                        new DiscountCondition( policyId, PERIOD_CONDITION,
-                                new PlayTime(MONDAY, new TimeInterval(LocalTime.of(9, 0), LocalTime.of(11, 30))), null)));
+                        new DiscountCondition(1L, policyId, SEQUENCE_CONDITION, null, null, null, 1),
+                        new DiscountCondition(3L, policyId, PERIOD_CONDITION, MONDAY, LocalTime.of(9, 0), LocalTime.of(11, 30), null)));
 
         // when
         Reservation reservation = reservationService.reserveScreening(customerId, screeningId, 2);

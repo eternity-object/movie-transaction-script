@@ -1,32 +1,31 @@
 package org.eternity.script.movie.domain;
 
-import jakarta.persistence.*;
 import lombok.*;
-import org.eternity.script.generic.PlayTime;
 
-@Entity
-@SequenceGenerator(
-        name = "discount_seq",
-        sequenceName = "discount_seq",
-        initialValue = 1, allocationSize = 50
-)
+import java.time.DayOfWeek;
+import java.time.LocalTime;
+
 @NoArgsConstructor(access = AccessLevel.PROTECTED) @AllArgsConstructor
 @Getter @Setter
 public class DiscountCondition {
     public enum ConditionType { PERIOD_CONDITION, SEQUENCE_CONDITION }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "discount_sequence")
     private Long id;
     private Long policyId;
+
     private ConditionType conditionType;
-    private PlayTime playTime;
+    private DayOfWeek dayOfWeek;
+
+    private LocalTime startTime;
+    private LocalTime endTime;
     private Integer sequence;
 
-    public DiscountCondition(Long policyId, ConditionType conditionType, PlayTime playTime, Integer sequence) {
+    public DiscountCondition(Long policyId, ConditionType conditionType, DayOfWeek dayOfWeek, LocalTime startTime, LocalTime endTime, Integer sequence) {
         this.policyId = policyId;
         this.conditionType = conditionType;
-        this.playTime = playTime;
+        this.dayOfWeek = dayOfWeek;
+        this.startTime = startTime;
+        this.endTime = endTime;
         this.sequence = sequence;
     }
     public boolean isPeriodCondition() {
