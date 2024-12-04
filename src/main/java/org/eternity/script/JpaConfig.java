@@ -1,6 +1,9 @@
 package org.eternity.script;
 
+import org.eternity.script.generic.PlayTime;
+import org.eternity.script.generic.TimeInterval;
 import org.eternity.script.movie.domain.DiscountCondition;
+import org.eternity.script.movie.domain.DiscountCondition.ConditionType;
 import org.eternity.script.movie.domain.DiscountPolicy;
 import org.eternity.script.movie.domain.Movie;
 import org.eternity.script.movie.domain.Screening;
@@ -36,10 +39,10 @@ public class JpaConfig {
             discountPolicyDAO.insert(discountPolicy);
 
             discountConditionDAO.insert(new DiscountCondition(discountPolicy.getId(),
-                    DiscountCondition.ConditionType.SEQUENCE_CONDITION, null, null, null, 1));
+                    ConditionType.SEQUENCE_CONDITION, null, 1));
             discountConditionDAO.insert(new DiscountCondition(discountPolicy.getId(),
-                    DiscountCondition.ConditionType.PERIOD_CONDITION, DayOfWeek.WEDNESDAY,
-                    LocalTime.of(9, 0), LocalTime.of(11, 30), null));
+                    ConditionType.PERIOD_CONDITION,
+                    new PlayTime(DayOfWeek.WEDNESDAY, new TimeInterval(LocalTime.of(9, 0), LocalTime.of(11, 30))), null));
         };
     }
 }
